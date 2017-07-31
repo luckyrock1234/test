@@ -5,7 +5,7 @@ import scrapy
 class ToScrapeSpiderXPath(scrapy.Spider):
     name = 'toscrape-xpath-tin'
     urlTemplate='https://www.tinxsys.com/TinxsysInternetWeb/dealerControllerServlet?searchBy=TIN&tinNumber='
-    tinNumber = 06512826303
+    tinNumber = '06512826303'
     start_urls = [
         urlTemplate+tinNumber,
     ]
