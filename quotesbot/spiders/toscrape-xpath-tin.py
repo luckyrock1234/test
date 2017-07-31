@@ -23,5 +23,6 @@ class ToScrapeSpiderXPath(scrapy.Spider):
     	next_page_url = urlTemplate+(tinNumber+1)
     	
     	print next_page_url
+    	yield scrapy.Request(response.urljoin(next_page_url))
 		#if next_page_url is not None:
          #   yield scrapy.Request(response.urljoin(next_page_url))
