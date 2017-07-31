@@ -1,0 +1,27 @@
+# -*- coding: utf-8 -*-
+import scrapy
+
+
+class ToScrapeSpiderXPath(scrapy.Spider):
+    name = 'toscrape-xpath-tin'
+    urlTemplate='https://www.tinxsys.com/TinxsysInternetWeb/dealerControllerServlet?searchBy=TIN&tinNumber='
+    tinNumber = 06512826303
+    start_urls = [
+        urlTemplate+tinNumber,
+    ]
+
+    def parse(self, response):
+    	
+    	if(!(response.xpath('//div/table/tr[0]/td[0]/div/text()').extract_first().startswith("Dealer Not Found for the entered TIN")))
+	    	yield {
+				'tin': response.xpath('//div/table/tr[1]/td[1]/div/text()').extract_first(),
+				'dealerName': response.xpath('//div/table/tr[2]/td[1]/div/text()').extract_first(),
+				'dealerAddress': response.xpath('//div/table/tr[3]/td[1]/div/text()').extract_first(),
+			}
+    	else
+    		print 'Dealer Not Found for the entered TIN --> '+tinNumber,
+    		
+    	next_page_url = urlTemplate+(tinNumber+1)
+    	
+		yield scrapy.Request(response.urljoin(next_page_url))
+
