@@ -12,7 +12,7 @@ class ToScrapeSpiderXPath(scrapy.Spider):
 
     def parse(self, response):
     	
-    	if(not (response.xpath('//div/table/tr[0]/td[0]/div/text()').extract_first().startswith("Dealer Not Found for the entered TIN")))
+    	if(not (response.xpath('//div/table/tr[0]/td[0]/div/text()').extract_first().startswith("Dealer Not Found for the entered TIN"))))
 	    	yield {
 				'tin': response.xpath('//div/table/tr[1]/td[1]/div/text()').extract_first(),
 				'dealerName': response.xpath('//div/table/tr[2]/td[1]/div/text()').extract_first(),
