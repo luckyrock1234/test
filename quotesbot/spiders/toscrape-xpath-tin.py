@@ -11,9 +11,7 @@ class ToScrapeSpiderXPath(scrapy.Spider):
     ]
 
     def parse(self, response):
-    	temp = response.xpath('//div/table/tr[0]/td[0]/div/text()').extract_first()
-    	
-    	if temp.startswith("Dealer Not Found for the entered TIN"):
+    	if response.xpath('//div/table/tr[0]/td[0]/div/text()').extract_first().startswith("Dealer Not Found for the entered TIN"):
     		print 'Dealer Not Found for the entered TIN --> '+tinNumber
     	else:
 	    	yield {
